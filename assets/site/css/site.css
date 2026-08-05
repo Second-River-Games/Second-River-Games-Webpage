@@ -399,7 +399,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--moss); outline-
   font: 400 var(--t-body)/1.7 var(--sans);
   color: var(--bone-85);
 }
-.hero__kicker { margin-bottom: clamp(14px, 12.4px + 0.41vw, 18px); }
+/* Bone rather than moss: this kicker is centred over open water, the brightest
+   part of the frame, where the hero scrim is at its weakest. Measured in moss it
+   was 2.40:1 against the 4.5:1 that 11px text needs. Moss is kept for every
+   kicker on a flat background. */
+.hero__kicker {
+  margin-bottom: clamp(14px, 12.4px + 0.41vw, 18px);
+  color: var(--bone);
+}
 
 /* Scroll cue: a hairline fading up from moss. */
 .scroll-cue {
