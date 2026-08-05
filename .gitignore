@@ -1,1 +1,13 @@
 .DS_Store
+*.zip
+
+# Internal working material. GitHub Pages serves every file on the published
+# branch and robots.txt allows all crawlers, so anything committed here is
+# public. The design handoffs live in Dropbox, shared with Bulut.
+design_handoff_cinematic/
+design_handoff_editorial/
+copy-drafts.md
+fix-plan.md
+
+# Local tool state, specific to one machine.
+.claude/settings.local.json

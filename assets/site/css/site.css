@@ -1,0 +1,755 @@
+/* ==========================================================================
+   Second River Games — site stylesheet
+   Implements the Cinematic / Immersive concept. Values follow
+   design_handoff_cinematic/design-reference-cinematic.html, which is the
+   authority where it and that folder's README disagree on a value. Where they
+   disagree on a mechanism that cannot survive a viewport change (the reference
+   carried a fixed width/height on one body paragraph), design intent wins and it
+   is re-expressed as a max-width.
+   Fluid sizes interpolate between the two supplied artboards: 390 and 1360.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Tokens
+   -------------------------------------------------------------------------- */
+
+:root {
+  --ink:  #0C0E0D;
+  --bank: #3E4A40;
+  --moss: #8AA37B;
+  --silt: #A79B84;
+  --bone: #EDEAE2;
+
+  --bone-90: rgba(237, 234, 226, 0.90);
+  --bone-85: rgba(237, 234, 226, 0.85);
+  --bone-80: rgba(237, 234, 226, 0.80);
+  --bone-78: rgba(237, 234, 226, 0.78);
+  --bone-75: rgba(237, 234, 226, 0.75);
+  --bone-72: rgba(237, 234, 226, 0.72);
+  --bone-60: rgba(237, 234, 226, 0.60);
+  --bone-40: rgba(237, 234, 226, 0.40);
+  --rule-faint: rgba(237, 234, 226, 0.08);
+  --rule: rgba(237, 234, 226, 0.10);
+  /* Small silt text sits at 0.8 minimum so it clears WCAG AA on ink. */
+  --silt-dim: rgba(167, 155, 132, 0.80);
+
+  --serif: 'Spectral', Georgia, 'Times New Roman', serif;
+  --sans:  'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  --mono:  'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Type */
+  --t-wordmark:  clamp(30px, 23.57px + 1.649vw, 46px);
+  --t-games:     clamp(16px, 13.19px + 0.722vw, 23px);
+  --t-strapline: clamp(10.5px, 9.50px + 0.258vw, 13px);
+  --t-h1-about:  clamp(34px, 26.76px + 1.856vw, 52px);
+  --t-h1-teaser: clamp(38px, 27.55px + 2.680vw, 64px);
+  --t-band-title: clamp(28px, 21.57px + 1.649vw, 44px);
+  --t-band-title-sm: clamp(27px, 20.97px + 1.546vw, 42px);
+  --t-section:   clamp(26px, 21.98px + 1.031vw, 36px);
+  --t-manifesto: clamp(21px, 18.19px + 0.722vw, 28px);
+  --t-intro-body: clamp(16px, 15.20px + 0.206vw, 18px);
+  --t-founded:   clamp(13px, 11.79px + 0.309vw, 16px);
+  --t-signup:    clamp(20px, 18.39px + 0.412vw, 24px);
+  --t-email:     clamp(18px, 16.39px + 0.412vw, 22px);
+  --t-name:      clamp(20px, 19.20px + 0.206vw, 22px);
+  --t-body: 16px;
+  --t-bio: 14px;
+
+  /* Spacing */
+  --gutter:  clamp(26px, 1.07px + 6.392vw, 88px);
+  --nav-y:   clamp(24px, 19.18px + 1.237vw, 36px);
+  --gap-70:  clamp(48px, 39.15px + 2.268vw, 70px);
+  --gap-100: clamp(60px, 43.92px + 4.124vw, 100px);
+  --gap-110: clamp(64px, 45.51px + 4.742vw, 110px);
+  --gap-130: clamp(74px, 51.49px + 5.773vw, 130px);
+
+  /* Heroes and bands. The two viewport-height heroes are set at the point of
+     use so they can carry a vh fallback for browsers without svh. */
+  --hero-about:   clamp(320px, 243.71px + 14.43vw, 440px);
+  --band-village: clamp(300px, 235.67px + 16.49vw, 460px);
+  --band-about:   clamp(280px, 223.71px + 14.43vw, 420px);
+  --portrait:     clamp(320px, 279.79px + 10.31vw, 420px);
+
+  --mark-hero:   clamp(64px, 55.16px + 2.268vw, 86px);
+  --river-filter: grayscale(0.05) hue-rotate(46deg) saturate(0.72);
+  --ease: cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Base
+   -------------------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { color-scheme: dark; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--bone-78);
+  font: 400 var(--t-body)/1.75 var(--sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, p { margin: 0; }
+img, svg { display: block; max-width: 100%; }
+
+a { color: var(--moss); text-decoration: none; }
+a:hover { color: var(--bone); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--moss); outline-offset: 3px; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 20;
+  padding: 12px 20px; background: var(--ink); border: 1px solid var(--moss);
+  font: 500 11px/1 var(--mono); letter-spacing: 0.18em; color: var(--bone);
+}
+.skip-link:focus { left: var(--gutter); top: 12px; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   3. Type atoms
+   -------------------------------------------------------------------------- */
+
+.kicker {
+  font: 500 11px/1.4 var(--mono);
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+.kicker--silt { color: var(--silt); }
+.kicker--wide { letter-spacing: 0.34em; }
+.kicker--num  { font-size: 12px; letter-spacing: 0.26em; }
+
+.email-display {
+  font: italic 400 var(--t-email) var(--serif);
+  color: var(--moss);
+}
+.email-display:hover { color: var(--bone); }
+
+/* Ghost button: outlined, used on image bands. */
+.btn-ghost {
+  display: inline-block;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--bone);
+  border: 1px solid var(--bone-40);
+  padding: 11px 20px;
+}
+.btn-ghost:hover { border-color: var(--bone); color: var(--bone); }
+
+/* The single filled CTA on the site. The reference draws this at Mono 600, but
+   the brand guide sanctions only 400/500 and the mockup itself never loaded a 600
+   face, so it rendered synthetic bold. 500 is real rather than faked. */
+.btn-solid {
+  display: inline-block;
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.16em;
+  color: var(--ink);
+  background: var(--moss);
+  padding: 14px 26px;
+  transition: background 200ms var(--ease), color 200ms var(--ease);
+}
+.btn-solid:hover { background: var(--bone); color: var(--ink); }
+
+/* --------------------------------------------------------------------------
+   4. Lockup and navigation (overlaid on the hero)
+   -------------------------------------------------------------------------- */
+
+.lockup { display: flex; align-items: center; gap: 15px; }
+.lockup__mark { width: 32px; height: 32px; flex: none; }
+.lockup__name {
+  font: 500 13px/1 var(--serif);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone);
+}
+.lockup__sub {
+  font: 500 9px/1 var(--mono);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--moss);
+  margin-left: 8px;
+}
+.lockup__text { display: flex; align-items: baseline; }
+
+.nav {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--nav-y) var(--gutter);
+}
+/* On the hero pages the nav lives outside <main>, so that the skip link
+   actually bypasses it, and is overlaid on the hero photograph from there. */
+.nav--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+/* The links are 11px text sitting on photography, so their contrast depends on
+   what is behind them. Measured on the Home hero at 1440px, 59% of the area
+   behind them fell below 4.5:1. This gradient, with the brighter link colour
+   below, clears 4.5:1 everywhere measured. It fades out well above the wordmark,
+   so only the chrome band is affected. */
+.nav--overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 190px;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(12,14,13,0.55) 0%, rgba(12,14,13,0) 100%);
+}
+.nav__menu { display: flex; gap: 38px; }
+.nav__link {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-75);
+  white-space: nowrap;
+}
+.nav__link:hover { color: var(--bone); }
+.nav__link[aria-current='page'] { color: var(--bone); }
+
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 8px 0 8px 12px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.nav__bar {
+  display: block;
+  height: 1.5px;
+  background: var(--bone);
+  transition: width 200ms var(--ease);
+}
+.nav__bar:first-child { width: 20px; }
+.nav__bar:last-child  { width: 14px; }
+.nav[data-open='true'] .nav__bar { width: 20px; }
+
+@media (max-width: 860px) {
+  /* Baseline, and what a visitor without JavaScript gets: the menu is simply a
+     stacked list under the lockup. The toggle stays hidden because nothing
+     would drive it. Navigation therefore never depends on the script. */
+  .nav { flex-wrap: wrap; }
+  .nav__menu {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }
+  .nav__link { padding: 14px 0; border-bottom: 1px solid var(--rule-faint); }
+  .nav__link:last-child { border-bottom: 0; }
+
+  /* With JavaScript the same list becomes a toggleable panel. */
+  .js .nav__toggle { display: flex; }
+  .js .nav__menu {
+    position: absolute;
+    top: 100%;
+    left: var(--gutter);
+    right: var(--gutter);
+    width: auto;
+    z-index: 5;
+    /* Solid, because it sits over photography. */
+    background: var(--ink);
+    border: 1px solid var(--rule);
+    padding: 6px var(--gutter) 14px;
+    display: none;
+  }
+  .js .nav[data-open='true'] .nav__menu { display: flex; }
+
+  /* Without JS the menu is a stacked list inside the absolutely positioned
+     header, around 199px tall at 390px, which is far more than a hero can
+     reserve. Put the header back in normal flow so it cannot cover the heading. */
+  html:not(.js) .nav--overlay { position: relative; }
+}
+
+/* --------------------------------------------------------------------------
+   5. Heroes
+   -------------------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.hero--home    { min-height: min(100vh, 860px); }
+.hero--village { min-height: min(92vh, 640px); }
+.hero--about   { min-height: var(--hero-about); }
+
+/* svh excludes the mobile browser chrome, so it is the value we want wherever
+   it exists. vh above is the fallback; without this guard an unsupported svh
+   would invalidate the declaration and collapse the hero to content height. */
+@supports (height: 100svh) {
+  .hero--home    { min-height: min(100svh, 860px); }
+  .hero--village { min-height: min(92svh, 640px); }
+}
+
+/* Below the 390 artboard the Studio h1 wraps to four lines and clears the nav by
+   only a few pixels. Give it more room; 390 and up is untouched. */
+@media (max-width: 360px) {
+  .hero--about { min-height: 380px; }
+}
+
+.hero__media { position: absolute; inset: 0; z-index: 0; }
+.hero__media picture, .hero__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero__media img {
+  object-fit: cover;
+  filter: var(--river-filter);
+}
+/* Gradient scrims dissolve each hero into the page. */
+.hero__scrim { position: absolute; inset: 0; }
+.hero--home .hero__scrim {
+  background: linear-gradient(180deg, rgba(12,14,13,0.62) 0%, rgba(12,14,13,0.15) 38%, rgba(12,14,13,0.55) 72%, #0C0E0D 100%);
+}
+.hero--village .hero__scrim {
+  background: linear-gradient(180deg, rgba(12,14,13,0.60) 0%, rgba(12,14,13,0.25) 42%, #0C0E0D 100%);
+}
+.hero--about .hero__scrim {
+  background: linear-gradient(180deg, rgba(12,14,13,0.55) 0%, rgba(12,14,13,0.75) 60%, #0C0E0D 100%);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;            /* bottom-anchored without absolute positioning */
+  /* Reserve the overlaid nav's height so hero copy can never run under it when
+     the content grows taller than the hero. */
+  padding: calc(2 * var(--nav-y) + 32px) var(--gutter) 0;
+}
+.hero__content--home    { padding-bottom: clamp(88px, 68.4px + 5.03vw, 120px); text-align: center; }
+.hero__content--village { padding-bottom: clamp(64px, 57.6px + 1.65vw, 80px); text-align: center; }
+.hero__content--about   { padding-bottom: clamp(44px, 36.0px + 2.06vw, 64px); max-width: calc(820px + 2 * var(--gutter)); }
+
+.hero__mark {
+  width: var(--mark-hero);
+  height: var(--mark-hero);
+  margin: 0 auto clamp(22px, 18.78px + 0.825vw, 30px);
+}
+/* The wordmark and GAMES are two lines of one <h1>, so the page heading is the
+   whole company name rather than half of it. */
+.hero__lockup { margin: 0; }
+.hero__wordmark {
+  display: block;
+  font: 400 var(--t-wordmark)/1.1 var(--serif);
+  /* 0.12em at the 390 artboard through to 0.14em at 1360, expressed in px so
+     the two ends actually interpolate. */
+  letter-spacing: clamp(3.6px, 2.458px + 0.293vw, 6.44px);
+  text-transform: uppercase;
+  color: var(--bone);
+}
+.hero__games {
+  display: block;
+  margin-top: clamp(7px, 6.6px + 0.10vw, 8px);
+  font: 500 var(--t-games)/1 var(--mono);
+  letter-spacing: 0.44em;
+  text-indent: 0.44em;          /* re-centres against the trailing letter-space */
+  text-transform: uppercase;
+  color: var(--moss);
+}
+.hero__strapline {
+  margin-top: clamp(24px, 21.6px + 0.62vw, 30px);
+  font: 400 var(--t-strapline)/1.8 var(--mono);
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--bone-75);
+}
+/* The Studio page opens on a label, not a headline: the photograph carries the
+   hero and the copy starts below it. Mono at display size echoes the "GAMES"
+   line in the Home hero. Left aligned, so no text-indent correction. */
+.hero__label {
+  margin: 0;
+  font: 500 clamp(20px, 16.98px + 0.773vw, 30px)/1.2 var(--mono);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--bone);
+}
+
+/* Unused since the Studio hero became a label. Kept with the other pre-commit
+   dead code; see the Outstanding section of README.md. */
+.hero__title--about {
+  font: 300 var(--t-h1-about)/1.2 var(--serif);
+  color: var(--bone);
+}
+.hero__title--village {
+  font: italic 300 var(--t-h1-teaser)/1.1 var(--serif);
+  color: var(--bone);
+}
+.hero__desc {
+  margin: 24px auto 0;
+  max-width: 620px;
+  font: 400 var(--t-body)/1.7 var(--sans);
+  color: var(--bone-85);
+}
+.hero__kicker { margin-bottom: clamp(14px, 12.4px + 0.41vw, 18px); }
+
+/* Scroll cue: a hairline fading up from moss. */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(22px, 19.6px + 0.62vw, 28px);
+  z-index: 2;
+  width: 1px;
+  height: clamp(40px, 35.2px + 1.24vw, 52px);
+  background: linear-gradient(180deg, rgba(138,163,124,0) 0%, var(--moss) 100%);
+}
+.photo-credit {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 24px;
+  z-index: 2;
+  font: 400 9.5px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(237, 234, 226, 0.55);
+}
+/* Below this the credit collides with the centred scroll cue. The 390 artboard
+   omits it too, so it is dropped rather than crowded. */
+@media (max-width: 700px) {
+  .photo-credit { display: none; }
+}
+
+/* --------------------------------------------------------------------------
+   6. Columns and sections
+   -------------------------------------------------------------------------- */
+
+.col {
+  max-width: calc(720px + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.col--intro   { max-width: calc(860px + 2 * var(--gutter)); text-align: center; }
+.col--village { max-width: calc(680px + 2 * var(--gutter)); }
+.col--signup  { max-width: calc(560px + 2 * var(--gutter)); text-align: center; }
+.col--founders { max-width: calc(1000px + 2 * var(--gutter)); }
+
+.stack { display: flex; flex-direction: column; gap: 24px; }
+.stack--loose { gap: 26px; }
+
+.intro { padding-top: var(--gap-130); }
+.intro__manifesto {
+  font: 300 var(--t-manifesto)/1.5 var(--serif);
+  color: var(--bone);
+}
+.intro__body {
+  margin: 44px auto 0;
+  max-width: 640px;             /* the reference also carried a stray fixed
+                                   width/height here; dropped, see README */
+  font: 400 var(--t-intro-body)/1.75 var(--sans);
+  color: var(--bone-72);
+}
+.intro__founded {
+  margin-top: 38px;
+  font: 400 var(--t-founded)/1.7 var(--mono);
+  letter-spacing: 0.08em;
+  color: var(--silt);
+}
+
+.section { margin-top: var(--gap-100); }
+.section__title {
+  font: 300 var(--t-section)/1.25 var(--serif);
+  color: var(--bone);
+}
+.section__num {
+  display: block;
+  margin-bottom: 14px;
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.26em;
+  color: var(--moss);
+}
+.section__body { margin-top: 30px; }
+
+/* "So our focus is to build both at once..." — emphasised in flow, not pulled out. */
+.emphasis {
+  margin: 24px 0;
+  font: italic 500 var(--t-body)/1.75 var(--sans);
+  color: var(--bone-78);
+}
+.lede-italic {
+  font: italic 400 20px/1.6 var(--serif);
+  color: var(--bone-90);
+}
+/* "That is all we will say for now." Set at body size so it settles into the
+   column rather than announcing itself; italic serif still marks it as a close. */
+.close-line {
+  font: italic 400 var(--t-body)/1.75 var(--serif);
+  color: var(--bone-90);
+}
+.village-close {
+  font: italic 400 var(--t-body)/1.75 var(--serif);
+  color: var(--bone);
+  text-align: center;
+  padding: 24px 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. Image bands with an overlaid text block
+   -------------------------------------------------------------------------- */
+
+.band {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.band--village { min-height: var(--band-village); margin-top: var(--gap-130); }
+.band--about   { min-height: var(--band-about);   margin-top: var(--gap-110); }
+
+.band__media { position: absolute; inset: 0; z-index: 0; }
+.band__media picture, .band__media img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+}
+.band__media img { object-fit: cover; filter: var(--river-filter); }
+.band__scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(12,14,13,0.92) 0%, rgba(12,14,13,0.55) 55%, rgba(12,14,13,0.20) 100%);
+}
+.band--about .band__scrim {
+  background: linear-gradient(90deg, rgba(12,14,13,0.90) 0%, rgba(12,14,13,0.50) 55%, rgba(12,14,13,0.15) 100%);
+}
+.band__content {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding: 0 var(--gutter) clamp(44px, 36.0px + 2.06vw, 70px);
+  max-width: calc(560px + 2 * var(--gutter));
+}
+.band--about .band__content { max-width: calc(600px + 2 * var(--gutter)); }
+.band__title {
+  font: 400 var(--t-band-title)/1.15 var(--serif);
+  color: var(--bone);
+}
+.band--about .band__title { font-size: var(--t-band-title-sm); }
+.band__desc {
+  margin-top: 18px;
+  font: 400 15px/1.7 var(--sans);
+  color: var(--bone-80);
+}
+.band__cta { margin-top: 24px; }
+.band__kicker { margin-bottom: 16px; }
+
+/* On narrow screens the 90deg scrim leaves the text edge too bright. */
+@media (max-width: 700px) {
+  .band__scrim,
+  .band--about .band__scrim {
+    background: linear-gradient(180deg, rgba(12,14,13,0.45) 0%, rgba(12,14,13,0.80) 55%, rgba(12,14,13,0.94) 100%);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. Signup / contact
+   -------------------------------------------------------------------------- */
+
+.signup { padding-top: var(--gap-130); }
+.signup__line {
+  margin: 14px 0 34px;
+  font: 300 var(--t-signup)/1.4 var(--serif);
+  color: var(--bone);
+}
+
+/* --------------------------------------------------------------------------
+   9. Founders — two equal columns
+   -------------------------------------------------------------------------- */
+
+.founders {
+  display: flex;
+  gap: 56px;
+  margin-top: var(--gap-70);
+}
+.founder { flex: 1; min-width: 0; }
+.founder__photo {
+  width: 100%;
+  height: var(--portrait);
+  background: var(--silt);
+  overflow: hidden;
+  isolation: isolate;
+}
+.founder__photo picture { display: block; height: 100%; }
+.founder__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.05);
+}
+.founder__photo img[data-offset='bubu'] { object-position: center 20%; }
+.founder__name {
+  margin-top: 24px;
+  font: 500 var(--t-name)/1.3 var(--serif);
+  color: var(--bone);
+}
+.founder__name a { color: inherit; border-bottom: 1px solid rgba(138,163,124,0.4); }
+.founder__name a:hover { color: var(--moss); }
+.founder__role {
+  margin-top: 6px;
+  font: 400 10.5px/1 var(--mono);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+.founder__bio {
+  margin-top: 18px;
+  font: 400 var(--t-bio)/1.7 var(--sans);
+  color: var(--bone-72);
+}
+
+@media (max-width: 760px) {
+  .founders { flex-direction: column; gap: 48px; }
+}
+
+/* --------------------------------------------------------------------------
+   10. Footer
+   -------------------------------------------------------------------------- */
+
+.footer {
+  border-top: 1px solid var(--rule-faint);
+  margin-top: var(--gap-110);
+  padding: 52px var(--gutter) 46px;
+}
+.footer__zones {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+.footer--slim .footer__zones { align-items: center; }
+.footer__brand { display: flex; flex-direction: column; gap: 14px; }
+.footer__lockup .lockup__mark { width: 26px; height: 26px; }
+.footer__lockup .lockup__name { font-size: 12px; }
+.footer__lockup .lockup__sub { font-size: 8px; margin-left: 6px; }
+.footer__place {
+  font: 400 10px/1.6 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--silt-dim);
+}
+.footer__nav {
+  display: flex; flex-direction: column; gap: 12px;
+  font: 500 10.5px/1 var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.footer__nav a { color: var(--silt); }
+.footer__nav a:hover { color: var(--bone); }
+.footer__contact { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+.footer__email { font: 400 12px/1 var(--sans); color: var(--moss); }
+.footer__email:hover { color: var(--bone); }
+.footer__social {
+  display: flex; align-items: center; gap: 8px;
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--silt);
+}
+
+/* When the fine print is the only thing left in the footer it should not draw a
+   second rule directly under the footer's own top border. */
+.footer--bare .footer__legal {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* Statutory disclosure. UK Ltd companies must publish these on the website. */
+.footer__legal {
+  margin-top: 34px;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule-faint);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font: 400 10px/1.7 var(--mono);
+  letter-spacing: 0.04em;
+  color: var(--silt-dim);
+  max-width: 760px;
+}
+
+@media (max-width: 700px) {
+  .footer__zones { flex-direction: column; gap: 32px; align-items: flex-start; }
+  .footer--slim .footer__zones { align-items: flex-start; }
+  .footer__contact { align-items: flex-start; }
+}
+
+/* --------------------------------------------------------------------------
+   10b. 404
+   -------------------------------------------------------------------------- */
+
+.notfound {
+  min-height: 54vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: var(--gap-100);
+  text-align: center;
+}
+.notfound__title {
+  margin-top: 14px;
+  font: 300 var(--t-section)/1.25 var(--serif);
+  color: var(--bone);
+}
+.notfound__body { margin-top: 22px; }
+.notfound__cta  { margin-top: 34px; }
+
+/* --------------------------------------------------------------------------
+   11. Hero mark motion
+   -------------------------------------------------------------------------- */
+
+.mark-anim [data-stroke] { animation: draw 800ms var(--ease) both; }
+.mark-anim [data-stroke='bone'] { animation-delay: 100ms; }
+.mark-anim [data-stroke='moss'] { animation-delay: 380ms; }
+.mark-anim [data-stroke='bone'],
+.mark-anim [data-stroke='moss'] { stroke-dasharray: 1; }
+.mark-anim [data-stroke='ripple-1'],
+.mark-anim [data-stroke='ripple-2'] {
+  animation: surface 500ms var(--ease) both;
+  transform-origin: 50px 50px;
+}
+.mark-anim [data-stroke='ripple-1'] { animation-delay: 950ms; }
+.mark-anim [data-stroke='ripple-2'] { animation-delay: 1050ms; }
+
+@keyframes draw    { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes surface { from { opacity: 0; transform: scaleX(0.6); } to { opacity: 1; transform: scaleX(1); } }
+
+.hero-reveal { animation: reveal 700ms var(--ease) both; animation-delay: 900ms; }
+@keyframes reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* --------------------------------------------------------------------------
+   12. Scroll reveal — one shot, gentle
+   Base state is visible; reveal.js adds [data-reveal] only when it is safe to
+   hide, so no-JS and reduced-motion users always see the content.
+   -------------------------------------------------------------------------- */
+
+[data-reveal='pending'] { opacity: 0; transform: translateY(18px); }
+[data-reveal='shown'] {
+  opacity: 1;
+  transform: none;
+  transition: opacity 600ms var(--ease), transform 600ms var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+  [data-reveal='pending'] { opacity: 1; transform: none; }
+}
