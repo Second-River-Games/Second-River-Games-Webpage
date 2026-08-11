@@ -188,9 +188,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--moss); outline-
   padding: var(--nav-y) var(--gutter);
 }
 /* On the hero pages the nav lives outside <main>, so that the skip link
-   actually bypasses it, and is overlaid on the hero photograph from there. */
+   actually bypasses it. Keep it overlaid on the hero photograph and pinned to
+   the viewport so the desktop links and mobile menu remain available while
+   scrolling. */
 .nav--overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
