@@ -107,11 +107,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--moss); outline-
 }
 .skip-link:focus { left: var(--gutter); top: 12px; }
 
-.visually-hidden {
-  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
-  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
-}
-
 /* --------------------------------------------------------------------------
    3. Type atoms
    -------------------------------------------------------------------------- */
@@ -631,42 +626,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--moss); outline-
   margin-top: var(--gap-110);
   padding: 52px var(--gutter) 46px;
 }
-.footer__zones {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 40px;
-}
-.footer--slim .footer__zones { align-items: center; }
-.footer__brand { display: flex; flex-direction: column; gap: 14px; }
-.footer__lockup .lockup__mark { width: 26px; height: 26px; }
-.footer__lockup .lockup__name { font-size: 12px; }
-.footer__lockup .lockup__sub { font-size: 8px; margin-left: 6px; }
-.footer__place {
-  font: 400 10px/1.6 var(--mono);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--silt-dim);
-}
-.footer__nav {
-  display: flex; flex-direction: column; gap: 12px;
-  font: 500 10.5px/1 var(--mono);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-.footer__nav a { color: var(--silt); }
-.footer__nav a:hover { color: var(--bone); }
-.footer__contact { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
-.footer__email { font: 400 12px/1 var(--sans); color: var(--moss); }
-.footer__email:hover { color: var(--bone); }
-.footer__social {
-  display: flex; align-items: center; gap: 8px;
-  font: 500 10px/1 var(--mono);
-  letter-spacing: 0.20em;
-  text-transform: uppercase;
-  color: var(--silt);
-}
-
 /* When the fine print is the only thing left in the footer it should not draw a
    second rule directly under the footer's own top border. */
 .footer--bare .footer__legal {
@@ -687,12 +646,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--moss); outline-
   letter-spacing: 0.04em;
   color: var(--silt-dim);
   max-width: 760px;
-}
-
-@media (max-width: 700px) {
-  .footer__zones { flex-direction: column; gap: 32px; align-items: flex-start; }
-  .footer--slim .footer__zones { align-items: flex-start; }
-  .footer__contact { align-items: flex-start; }
 }
 
 /* --------------------------------------------------------------------------
