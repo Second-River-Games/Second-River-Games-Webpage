@@ -25,6 +25,35 @@ Asset paths are root-relative (`/assets/...`), which is correct because the site
 served from the apex domain via `CNAME`. If `CNAME` is ever removed, the
 `bulutk.github.io/<repo>/` URL would break every path.
 
+## AI agent readiness
+
+The site deliberately welcomes AI crawlers and agents rather than blocking them —
+obscurity is a bigger risk for a two-person studio than a model reading the public
+site. The policy: indexing, retrieval, summarization, citation, and training are all
+welcome. Revisit `ai-train` if the domain starts hosting content worth protecting
+(narrative excerpts, art, unreleased design material) — this policy was set while the
+site was still marketing copy and founder bios, and a blanket "yes" is not something
+to leave on autopilot as that changes.
+
+- **`robots.txt`** stays wide open (`Disallow:` empty) and carries a
+  [Content Signals](https://developers.cloudflare.com/bots/additional-configurations/content-signals/)
+  line: `Content-Signal: search=yes, ai-input=yes, ai-train=yes`.
+- **`llms.txt`** at the root is a short machine-readable summary of the studio and
+  the game, per the [llms.txt convention](https://llmstxt.org/), linking to the
+  markdown twin of each page.
+- **Markdown twins** (`index.md`, `studio/index.md`,
+  `village-of-whispers/index.md`) mirror each HTML page's content in clean markdown
+  for agents that would rather not parse HTML/CSS. Each HTML page links to its twin
+  via `<link rel="alternate" type="text/markdown">` in `<head>`. When page copy
+  changes, update the matching `.md` file in the same commit — nothing regenerates
+  these automatically.
+- **HTTP `Link` header** pointing bots at the markdown alternates/`llms.txt` is not
+  yet set up. GitHub Pages cannot set custom response headers, but the domain is
+  proxied through Cloudflare, so a Transform Rule (or a small Worker) can add it at
+  the edge. Not done in this repo because it needs Cloudflare dashboard/API access.
+  A rule matching `second-river-games.com/*` adding a response header
+  `Link: </llms.txt>; rel="alternate"; type="text/markdown"` covers it.
+
 ## Design source
 
 The design reference for the current look is the "Cinematic / Immersive · Pure

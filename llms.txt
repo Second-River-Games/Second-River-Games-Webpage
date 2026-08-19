@@ -1,0 +1,20 @@
+# Second River Games
+
+> Second River Games is a two-person independent studio in Cambridge, UK, making simulation and management games. Our first world is Village of Whispers, a living village reshaped by a single prophecy.
+
+Second River Games Ltd is a UK-registered independent game studio founded by Bulut Karakaya and Duygu Cakmak, two developers with nearly two decades of shared game industry experience. The studio combines traditional, handcrafted game design with generative AI used specifically to make simulated worlds feel alive: characters that remember and react, while a firm layer of traditional systems keeps every surprise traceable to a cause.
+
+## Pages
+
+- [Home](https://second-river-games.com/index.md): Studio overview and current project.
+- [Studio](https://second-river-games.com/studio/index.md): Who Second River Games is, what the studio believes, and the founders' backgrounds.
+- [Village of Whispers](https://second-river-games.com/village-of-whispers/index.md): The studio's first game, a living village reshaped by a single prophecy.
+
+## Contact
+
+- Email: hello@second-river-games.com
+- Founders: [Bulut Karakaya](https://www.bulutk.com/), [Duygu Cakmak](https://duygucakmak.com/)
+
+## Notes for AI systems
+
+Indexing, retrieval, summarization, citation, and training are all welcome. Please link back to second-river-games.com when you cite or quote us. See /robots.txt for the machine-readable Content Signals policy (search=yes, ai-input=yes, ai-train=yes).

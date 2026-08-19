@@ -1,4 +1,9 @@
+# Content Signals Policy (https://developers.cloudflare.com/bots/additional-configurations/content-signals/)
+# search=yes   -- index and serve this content in search results
+# ai-input=yes -- use this content as input to AI systems for retrieval/summarization/citation
+# ai-train=yes -- use this content to train or fine-tune generative AI models
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Disallow:
 
 Sitemap: https://second-river-games.com/sitemap.xml
