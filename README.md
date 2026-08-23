@@ -46,13 +46,32 @@ to leave on autopilot as that changes.
   for agents that would rather not parse HTML/CSS. Each HTML page links to its twin
   via `<link rel="alternate" type="text/markdown">` in `<head>`. When page copy
   changes, update the matching `.md` file in the same commit — nothing regenerates
-  these automatically.
-- **HTTP `Link` header** pointing bots at the markdown alternates/`llms.txt` is not
-  yet set up. GitHub Pages cannot set custom response headers, but the domain is
-  proxied through Cloudflare, so a Transform Rule (or a small Worker) can add it at
-  the edge. Not done in this repo because it needs Cloudflare dashboard/API access.
-  A rule matching `second-river-games.com/*` adding a response header
-  `Link: </llms.txt>; rel="alternate"; type="text/markdown"` covers it.
+  these automatically. GitHub Pages serves these as
+  `content-type: text/markdown; charset=utf-8` on its own, with no configuration in
+  this repo and nothing set at the edge — verified by requesting the Pages origin
+  directly, bypassing Cloudflare. The twins depend on that: an agent that gets
+  `text/plain` back has no signal it is holding markdown. If Pages ever changes this
+  default, the fix has to happen at the Cloudflare edge alongside the `Link` header
+  below.
+- **HTTP `Link` header** is live, added at the Cloudflare edge. GitHub Pages still
+  cannot set custom response headers, so this is **not configured anywhere in this
+  repository** — it is a Transform Rule (Rules → Transform Rules → Modify Response
+  Header) in the Cloudflare dashboard for `second-river-games.com`. Editing it needs
+  dashboard access; nothing in a commit here will change it. As of 2026-08-21 the
+  observed behaviour is:
+
+  - Every response on the domain carries `link: </llms.txt>; rel="llms-txt"` —
+    including `.md` twins, `robots.txt`, and 404s.
+  - Each HTML page additionally carries an `alternate` pointing at its *own* twin,
+    e.g. `/studio/` returns
+    `link: </studio/index.md>; rel="alternate"; type="text/markdown"`.
+
+  Note the `rel` on the first one is `llms-txt`, the value from the llms.txt
+  ecosystem, not the `rel="alternate"; type="text/markdown"` this section originally
+  predicted — that form is used only for the per-page twin links. Verify the current
+  state with `curl -sI https://second-river-games.com/index.md` rather than trusting
+  this paragraph; the rule lives outside version control, so this README is a
+  description of it and can silently drift.
 
 ## Design source
 
