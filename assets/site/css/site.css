@@ -390,6 +390,27 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--moss); outline-
   font: italic 300 var(--t-h1-teaser)/1.1 var(--serif);
   color: var(--bone);
 }
+/* Iteration Room: the product logo stands in for the title, in the brand's
+   website colourway (06-Brand/iteration-room, "-site" files: bone wordmark and
+   front frame, river-green back frames, stone tagline; transparent). Sizes and
+   the soft glow follow the brand README's "On the website" section. */
+.hero__logo { margin: 0; line-height: 0; }
+.hero__logo picture { display: block; }
+.hero__logo img {
+  display: block;
+  height: clamp(96px, 11vw, 150px);
+  width: auto;
+  margin: 0 auto;
+}
+.hero__content--ir::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: -1;
+  background: radial-gradient(ellipse 45% 35% at 50% 55%, rgba(12,13,12,.55), rgba(12,13,12,0) 70%);
+}
+@media (max-width: 480px) {
+  .hero__logo img { height: auto; width: min(300px, 80vw); }
+}
+.band__logo { line-height: 0; }
+.band__logo img { display: block; height: clamp(48px, 5.2vw, 72px); width: auto; }
 .hero__desc {
   margin: 24px auto 0;
   max-width: 620px;
@@ -549,6 +570,39 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--moss); outline-
 }
 .band__cta { margin-top: 24px; }
 .band__kicker { margin-bottom: 16px; }
+
+/* Home: two offers side by side in one band (Showrunner left, our games right).
+   The scrim darkens from the bottom so both columns read, not only the left. */
+.band__split {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+  padding: 0 var(--gutter) clamp(44px, 36.0px + 2.06vw, 70px);
+}
+.band__split .band__content {
+  margin-top: 0;
+  padding: 0;
+  max-width: 520px;
+}
+.band__split .band__content + .band__content {
+  padding-left: var(--gutter);
+  border-left: 1px solid var(--bone-40);
+}
+.band--split .band__scrim {
+  background: linear-gradient(180deg, rgba(12,14,13,0.30) 0%, rgba(12,14,13,0.72) 50%, rgba(12,14,13,0.92) 100%);
+}
+@media (max-width: 700px) {
+  .band__split { grid-template-columns: 1fr; gap: 40px; padding-top: var(--gap-70); }
+  .band__split .band__content + .band__content {
+    padding-left: 0;
+    padding-top: 40px;
+    border-left: 0;
+    border-top: 1px solid var(--bone-40);
+  }
+}
 
 /* On narrow screens the 90deg scrim leaves the text edge too bright. */
 @media (max-width: 700px) {

@@ -16,6 +16,7 @@ will host its own rebrand announcement page and will not redirect.
 | URL | File |
 | --- | --- |
 | `/` | `index.html` |
+| `/iteration-room/` | `iteration-room/index.html` |
 | `/studio/` | `studio/index.html` |
 | `/village-of-whispers/` | `village-of-whispers/index.html` |
 | any 404 | `404.html` (GitHub Pages serves this automatically) |
@@ -41,7 +42,7 @@ to leave on autopilot as that changes.
 - **`llms.txt`** at the root is a short machine-readable summary of the studio and
   the game, per the [llms.txt convention](https://llmstxt.org/), linking to the
   markdown twin of each page.
-- **Markdown twins** (`index.md`, `studio/index.md`,
+- **Markdown twins** (`index.md`, `iteration-room/index.md`, `studio/index.md`,
   `village-of-whispers/index.md`) mirror each HTML page's content in clean markdown
   for agents that would rather not parse HTML/CSS. Each HTML page links to its twin
   via `<link rel="alternate" type="text/markdown">` in `<head>`. When page copy

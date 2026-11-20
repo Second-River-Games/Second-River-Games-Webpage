@@ -1,14 +1,15 @@
 # Second River Games
 
-> Second River Games is a two-person independent studio in Cambridge, UK, making simulation and management games. Our first world is Village of Whispers, a living village reshaped by a single prophecy.
+> Second River Games is an independent studio of experienced game developers in Cambridge, UK, making its own games and building Iteration Room (working title), a production studio for game makers. The creator makes the creative decisions, and Iteration Room does the production work inside the game engine they already use, keeping the game true to what they had in mind. We work on both sides: our own games, and the technology to make them.
 
-Second River Games Ltd is a UK-registered independent game studio founded by Bulut Karakaya and Duygu Cakmak, two developers with nearly two decades of shared game industry experience. The studio combines traditional, handcrafted game design with generative AI used specifically to make simulated worlds feel alive: characters that remember and react, while a firm layer of traditional systems keeps every surprise traceable to a cause.
+Second River Games Ltd is a UK-registered independent game studio founded by Bulut Karakaya and Duygu Cakmak, two developers with nearly two decades of shared game industry experience. Iteration Room starts each game from a playable foundation (a world, characters and systems that already work together), turns the creator's direction into changes in the game, checks every change against their design and tests it. It is built for small professional teams first (small studios and experienced developers going independent), then more independent developers, and later anyone with a good game idea. The studio's first foundation is Village of Whispers, a living village whose people remember and act on what they hear; its first game built from it is Once Upon a Well, a fairy-tale village where the player's answers decide how each tale ends.
 
 ## Pages
 
-- [Home](https://second-river-games.com/index.md): Studio overview and current project.
-- [Studio](https://second-river-games.com/studio/index.md): Who Second River Games is, what the studio believes, and the founders' backgrounds.
-- [Village of Whispers](https://second-river-games.com/village-of-whispers/index.md): The studio's first game, a living village reshaped by a single prophecy.
+- [Home](https://second-river-games.com/index.md): Who Second River Games is: we make our own games and build Iteration Room.
+- [Iteration Room](https://second-river-games.com/iteration-room/index.md): What Iteration Room is, how it works and who it is for.
+- [Studio](https://second-river-games.com/studio/index.md): Who Second River Games is, why we are building Iteration Room, and the founders' backgrounds.
+- [Our games](https://second-river-games.com/village-of-whispers/index.md): Village of Whispers, our living world, and Once Upon a Well, our first game built from it with Iteration Room.
 
 ## Contact
 

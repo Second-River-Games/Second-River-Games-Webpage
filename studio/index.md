@@ -1,24 +1,24 @@
 # The Studio | Second River Games
 
-An independent studio in Cambridge, UK, making simulation and management games: worlds that surprise you, and still make sense when they do.
+Second River Games is an independent studio in Cambridge, UK. We make the games we want to play, and we build Iteration Room, the tools we want to use to make them.
 
-Hello. We are Second River Games, an independent studio in Cambridge, UK. After years of making games and learning what makes them special, we are building the studio we have always wanted to create. We would love you to be here from the start.
-
-We make simulation and management games: worlds where characters, systems, and stories come together in ways nobody scripted, including us. We think the best simulations feel alive, and that a game can surprise you and still make sense. That is the whole idea of the studio.
+Hello. We are Second River Games, an independent studio in Cambridge, UK. After years of making games in studios large and small, we are building the studio we have always wanted to create. We would love you to be here from the start.
 
 ## What we believe
 
-For a long time, games have asked us to choose between two pleasures.
+Games are remarkable. They bring together art, storytelling, technology and carefully designed systems to create experiences that can surprise us, move us and stay with us long after we stop playing.
 
-Some worlds are deeply authored: beautiful, emotional, handcrafted, and the same every time you return. Others are deeply systemic: alive with surprise, but hard to read when something interesting finally happens.
+We believe there is still so much unexplored creative potential in games, both in the experiences we can offer players and in the ways we make them. New technology gives us a chance to rethink both.
 
-We think that tradeoff was a restriction of the old tools and technology, rather than a game direction choice.
+Our ambition is to expand what games can be and what game developers can create.
 
-So our focus is to build both at once: worlds that surprise you, and still make sense when they do.
+In our games, we look at how carefully crafted worlds can become more alive and responsive. We combine the things we have always loved about games (thoughtfully designed systems, meaningful choices and handcrafted experiences) with AI that lets characters remember, relationships evolve and worlds respond to their players in ways they never could before.
 
-Underneath everything are the things we have always loved: carefully designed systems, choices with consequences, handcrafted worlds. Then we bring in gen AI where it deepens the experience: helping the game understand what players actually mean, letting characters remember you and react to you, and giving our small team room to spend their time on creativity, design and play.
+Through Iteration Room, we are rethinking how games are made. We want developers to have more room to experiment, pursue ambitious ideas and spend their time on the parts of game development they love.
 
-The trick is the balance. We let AI generate the living, unpredictable part: how a character feels, what they remember, how they respond to you. Underneath that sits a firm set of traditional rules that keeps the world coherent, so every surprise still follows cause and effect. When something strange happens in one of our games, it happened for a reason, and if you are curious you can trace it back.
+Underlying both is our belief in craftsmanship, strong technical foundations and human creativity. These principles guide the technology we build and the games we make.
+
+We are building the tools we want to use and making the games we want to play.
 
 ## Why we're called Second River
 
@@ -26,21 +26,13 @@ Twenty-five centuries ago, Heraclitus taught that you cannot step in the same ri
 
 We love that thought. The first stretch of a working life is the first river: you learn your craft, you experiment, you push at your edges to find out who you are. This studio is our second act. Same people, changed by the water.
 
-It is also a promise about the games. We build worlds that run on living systems: places that remember you, react to you, and never play the same way twice. The river you step into tomorrow will have moved overnight. To us, that is what games should be like.
+It is also how games get made. You play, you change your mind, you play again, and the game you step into tomorrow will have moved overnight. We are building a studio that moves with you, and still remembers where you meant to go.
 
 As for Heraclitus, we like to think he would have made a good game designer. He understood that change is what makes a world worth stepping into at all.
 
-## Our first world: Village of Whispers
-
-Village of Whispers is a living village where a single prophecy can reshape relationships, rituals, politics, and the odds of survival.
-
-The villagers love, argue, remember, and gossip. When you speak, they do not simply obey. They interpret you, spread the word, distort it, and slowly your words become their culture. Belief becomes behaviour, and behaviour decides who leads, who survives, and what the village becomes.
-
-That is all we will say for now. More will come later, soon.
-
 ## Who we are
 
-Second River was founded in the UK by two developers who have known each other for nearly two decades. We have spent our careers on opposite ends of the same problem: how to make a game world feel alive. This studio is where that work comes together, and where we build something bigger than either of us could alone.
+Second River was founded in the UK by two developers who have known each other for nearly two decades. Between us we have led teams, budgets and partnerships, from Total War to Monument Valley 3, and we now help other studios work out how to make games with AI: developers from more than 30 studios trained with us in October 2026 alone. This studio is where that work comes together, and where we build something bigger than either of us could alone.
 
 ### Bulut Karakaya, co-founder
 
@@ -56,12 +48,12 @@ Duygu spent a decade helping Total War factions and armies to think and behave. 
 
 ## Say hello
 
-If you have read this far, we would love to hear from you: what you play, what you wish existed, what you make of the village.
+We're curious about the games people dream of making, the challenges they face and the ideas they haven't yet had the chance to explore. If any of what we're building resonates with you, come and say hello.
 
 hello@second-river-games.com
 
 ---
 
-Other pages: [Home](https://second-river-games.com/) ([markdown](https://second-river-games.com/index.md)) &middot; [Village of Whispers](https://second-river-games.com/village-of-whispers/) ([markdown](https://second-river-games.com/village-of-whispers/index.md))
+Other pages: [Home](https://second-river-games.com/) ([markdown](https://second-river-games.com/index.md)) &middot; [Iteration Room](https://second-river-games.com/iteration-room/) ([markdown](https://second-river-games.com/iteration-room/index.md)) &middot; [Our games](https://second-river-games.com/village-of-whispers/) ([markdown](https://second-river-games.com/village-of-whispers/index.md))
 
 &copy; 2026 Second River Games Ltd. Registered in England and Wales, company number 16705965. Registered office: Unit A, 82 James Carter Road, Mildenhall, United Kingdom, IP28 7DE.
