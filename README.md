@@ -141,6 +141,16 @@ Also unused by the site: `app.yaml` and `main.py` (Google App Engine, from a pre
 host) and `.htaccess.txt` (Apache). They do nothing on GitHub Pages. Left in place
 deliberately; delete when you have confirmed nothing else depends on them.
 
+## Stylesheet cache
+
+Every page links the stylesheet with a version tag, `site.css?v=YYYY-MM-DD`.
+Browsers and Cloudflare keep `site.css` for a while, so after a CSS change
+returning visitors can see new HTML with the old stylesheet (the 20 Nov 2026
+release showed the Home banner stacked instead of split until a hard refresh).
+**Whenever `site.css` changes, bump the date in the `<link>` on every page**
+(`index.html`, `iteration-room/`, `studio/`, `village-of-whispers/`, `404.html`)
+in the same commit.
+
 ## Fonts
 
 Self-hosted rather than loaded from the Google Fonts CDN: it removes two third-party
